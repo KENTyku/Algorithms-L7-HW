@@ -30,27 +30,59 @@ public class AlgorithmsL7HW {
     static void readMatrix() throws FileNotFoundException, IOException{
         BufferedReader reader = new BufferedReader(new FileReader("matrix.txt"));
         String line;
-        List<String> lines = new ArrayList<String>();
-        List<String> linestemp = new ArrayList<String>();
+        List<String> lines = new ArrayList<String>();     
         while ((line = reader.readLine()) != null) {
             lines.add(line);
         }
-        //если нужен массив то список можно запросто преобрпзовать
+        //преобразуем список строк в массив строк
         String [] array = lines.toArray(new String[lines.size()]);
-        for (int i = 0; i < lines.size(); i++) {
+        /**
+         * считываем первую строку которая определяет размер матрицы (так 
+         * было оговорено) и преобразуем в int
+         */
+        int sizeArray=Integer.parseInt(array[0]);
+        /**
+         * помещаем в мартицу считанные строки, разбивая каждую строку
+         * на элементы
+         */
+        int [][] array2D=new int[sizeArray][sizeArray];
+        for (int i = 0; i < sizeArray; i++) {
 //            System.out.println(array[i]);
-            String[]matrix=array[i].split(" ");
+            String[]matrix=array[i+1].split(" ");
             for (int j = 0; j < matrix.length; j++) {
-                linestemp.add(matrix[j]);
+                array2D[i][j]=Integer.parseInt(matrix[j]);
             }
             
         }
-        array=linestemp.toArray(new String[linestemp.size()]);
-        for (int i = 0; i < linestemp.size(); i++) {
-            System.out.print(array[i]+" ");
+        //вывод матрицы
+        for (int i = 0; i < sizeArray; i++) {
+            for (int j = 0; j < sizeArray; j++) {
+                System.out.print(array2D[i][j]+" ");
+            }
+            System.out.println();
+            
         }
         
         
+    }
+    
+    /**
+     * Задание 2 Написать рекурсивную функцию обхода графа в глубину.
+     */
+    void runmatrix(){
+        
+        class Node {
+            int key;
+            int value;
+            Node l;
+            Node r;
+            Node p;
+            public Node(int key, int value, Node p) {
+                this.key = key;
+                this.value = value;
+                this.p = p;
+            }
+        }
     }
     
 }
